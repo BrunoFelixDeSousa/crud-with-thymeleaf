@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+
+    <title>Cadastro</title>
+
+</head>
+<body>
+<div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Processo Seletivo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end text-right" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/candidato}">Cadastrar Candidato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+
+        <h1 class="m-4">Cadastrar Candidato</h1>
+
+        <form action="candidato" method="post">
+
+            <div class="mb-2">
+                <label for="formGroupExampleInput" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" name="nome"
+                       placeholder="Nome Do Candidato">
+            </div>
+
+            <div class="mb-2">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email">
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" placeholder="Telefone"
+                           aria-label="First name">
+                </div>
+
+                <div class="col">
+                    <label class="form-label">Data de nascimento</label>
+                    <input type="date" class="form-control" name="dataDeNascimento" placeholder="Data de nascimento"
+                           aria-label="Last name">
+                </div>
+
+                <div class="col">
+                    <label class="form-label" for="escolaridadeSelect">Escolaridade:</label>
+                    <select class="form-select" id="escolaridadeSelect" name="escolaridade">
+                        <option value="">Selecione...</option>
+                        <!-- Iterar sobre os valores do enum e criar as opções -->
+                        <th:block
+                                th:each="escolaridade : ${T(br.com.bfelix.crudwiththymeleaf.models.enums.EscolaridadeEnum).values()}">
+                            <option th:value="${escolaridade.code}" th:text="${escolaridade.descricao}"></option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label class="form-label" for="ufSelect">Estado (UF):</label>
+                    <select class="form-select" id="ufSelect">
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="cidadeSelect">Cidade:</label>
+                    <select class="form-select" id="cidadeSelect">
+                        <option value="">Selecione uma UF primeiro</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label class="form-label">Bairro</label>
+                    <input type="text" class="form-control" name="bairro" placeholder="Bairro"
+                           aria-label="First name">
+                </div>
+
+                <div class="col">
+                    <label class="form-label">Rua</label>
+                    <input type="text" class="form-control" name="rua" placeholder="Rua"
+                           aria-label="Last name">
+                </div>
+
+                <div class="col">
+                    <label class="form-label">Numero</label>
+                    <input type="text" class="form-control" name="numero" placeholder="Numero"
+                           aria-label="Last name">
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto mt-5">
+                <button class="btn btn-outline-primary" type="submit">Salvar</button>
+                <button class="btn btn-outline-danger" type="button">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script th:src="@{js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{js/carregarEstados.js}"></script>
+</body>
+</html>
